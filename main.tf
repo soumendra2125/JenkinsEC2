@@ -1,8 +1,18 @@
 resource "aws_instance" "my_vm" {
- ami           = var.ami //Ubuntu AMI
- instance_type = var.instance_type
+ ami           = "ami-04a81a99f5ec58529" //Ubuntu AMI
+ instance_type = "t2.micro"
 
  tags = {
-   Name = var.name_tag,
+   Name = "My_Instance"
  }
+}
+terraform {
+  backend "s3" {
+    bucket = "mybucket564"
+    key    = "state"
+    region = "us-east-1"
+  }
+}
+provider "aws" {
+  region = "us-east-1"
 }
